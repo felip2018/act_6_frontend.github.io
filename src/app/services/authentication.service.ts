@@ -17,4 +17,8 @@ export class AuthenticationService {
     }
     return this.http.post(`${environment.basePath}/authentication/login`, body)
   }
+
+  public signup(userInfo: any) {
+    return this.http.post(`${environment.basePath}/authentication/register`, userInfo);
+  }
 }

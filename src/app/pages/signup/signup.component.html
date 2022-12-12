@@ -1,1 +1,50 @@
-<p>signup works!</p>
+<div class="row justify-content-center">
+    <form class="col-xs-12 col-sm-12 col-md-6 signupContainer" [formGroup]="signupForm" (ngSubmit)="submit()">
+        <h4>Registrarse</h4>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>Nombres</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" formControlName="lastname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>Tipo de identificación</label>
+                <select class="form-control" formControlName="documenttype">
+                    <option value="">-Seleccione</option>
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
+                    <option value="PAS">Pasaporte</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label>Número de identificación</label>
+                <input type="number" class="form-control" formControlName="document">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" formControlName="phone">
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label>Correo electrónico</label>
+                <input type="text" class="form-control" formControlName="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" formControlName="password">
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="signupForm.invalid">Registrarse</button>
+    </form>
+</div>

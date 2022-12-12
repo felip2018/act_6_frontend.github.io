@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -10,6 +12,9 @@ import { LoginComponent } from './pages/login/login.component';
 export class AppComponent implements OnInit{
   userName: string = '';
   enableButtons = false;
+  loginSubscription: Subscription | any = null;
+
+  constructor(private router: Router){}
 
   ngOnInit() {
     const isLogin = sessionStorage.getItem('isLogin');
@@ -22,7 +27,7 @@ export class AppComponent implements OnInit{
   subscribeToEmmiter(componentRef: any) {
     if (componentRef instanceof LoginComponent){
       console.log(componentRef);
-      componentRef.successLogin.subscribe((ev) => {
+      this.loginSubscription = componentRef.successLogin.subscribe((ev) => {
         console.log("Parent get event:: ", ev);
         this.userName = `Bienvenido <strong>${ev.name}</strong>`;
       })
@@ -30,7 +35,10 @@ export class AppComponent implements OnInit{
   }
 
   unsubscribe() {
-    console.log('unsubscribe()');
+    console.log(this.loginSubscription);
+    if (this.loginSubscription !== null) {
+      this.loginSubscription.unsubscribe();
+    }
   }
 
   public closeSession() {
@@ -45,7 +53,9 @@ export class AppComponent implements OnInit{
       }).then((result) => {
         if (result.isConfirmed) {
           sessionStorage.clear();
-          Swal.fire('Sesión finalizada', '¡La sesión ha sido finalizada exitosamente!', 'success')
+          this.userName = '';
+          Swal.fire('Sesión finalizada', '¡La sesión ha sido finalizada exitosamente!', 'success');
+          this.router.navigate(['/login']);
         }
       })
     } else {

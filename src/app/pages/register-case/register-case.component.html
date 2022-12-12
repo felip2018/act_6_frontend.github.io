@@ -1,1 +1,12 @@
-<p>register-case works!</p>
+<div class="row justify-content-center">
+    <form class="col-xs-12 col-sm-12 col-md-6 registerContainer" [formGroup]="registerCaseForm" (ngSubmit)="submit()">
+        <h4>Registrar caso</h4>
+        <hr>
+        <label>Asunto</label>
+        <input type="text" class="form-control" formControlName="subject">
+        <label>Descripción</label>
+        <textarea formControlName="description" class="form-control" cols="30" rows="10"></textarea>
+        <hr>
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="registerCaseForm.invalid">Registrar caso</button>
+    </form>
+</div>
